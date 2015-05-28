@@ -51,16 +51,14 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/current_points"
-            android:id="@+id/tvCurrentPointsLabel"
-          />
+            android:id="@+id/tvCurrentPointsLabel" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00"
-            android:id="@+id/tvCurrentPoints"
-           />
+            android:id="@+id/tvCurrentPoints" />
     </LinearLayout>
 
     <Button
@@ -68,9 +66,11 @@
         android:layout_height="wrap_content"
         android:text="@string/get_more_points"
         android:id="@+id/btnGetPoints" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

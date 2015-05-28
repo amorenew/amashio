@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 14
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "mazeed.co.smsproject"
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 14
         versionCode 1
         versionName "1.0"
     }
@@ -22,5 +22,4 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:22.1.1'
-    compile 'com.android.support:appcompat-v7:22.1.1'
 }
