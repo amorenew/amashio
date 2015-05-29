@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:scaleType="centerInside"
-        android:src="@drawable/splash" />
+        android:src="@mipmap/splash" />
 
     <ProgressBar
         android:layout_width="wrap_content"

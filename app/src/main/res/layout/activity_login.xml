@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:id="@+id/ivLogo"
-        android:src="@drawable/splash" />
+        android:src="@mipmap/splash" />
 
     <EditText
         android:layout_width="match_parent"
