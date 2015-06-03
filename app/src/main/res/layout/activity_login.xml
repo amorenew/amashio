@@ -9,17 +9,14 @@
         layout="@layout/app_bar" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_below="@id/appBar"
-        android:gravity="center"
-        android:orientation="vertical">
+        style="@style/ContainerLayout">
 
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:src="@mipmap/splash" />
+            android:src="@mipmap/splash"
+            style="@style/LoginLogo" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -27,7 +24,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textStyle="bold"
+            style="@style/LoginEmail" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -35,24 +34,37 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textStyle="bold"
+            style="@style/LoginEmail" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login" />
+            android:text="@string/login"
+
+            android:background="@color/purple"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            style="@style/LoginButtonLogin" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
             android:background="@drawable/line_dashed_gray"
-            android:layerType="software" />
+            android:layerType="software"
+            style="@style/LoginDashLine" />
 
         <Button
             android:id="@+id/btnSendFeedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/send_feedback" />
+            android:text="@string/send_feedback"
+            android:background="@color/gray"
+            android:textColor="@color/gray2"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            style="@style/LoginButtonSendFeedBack" />
     </LinearLayout>
 </RelativeLayout>

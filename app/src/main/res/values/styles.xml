@@ -9,8 +9,47 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryColorDark</item>
         <item name="colorAccent">@color/accentColor</item>
+    </style>
 
+    <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">#FFF</item>//text color
+        <item name="android:textColorSecondary">#FFF</item>//menu icon color
+    </style>
 
+    <style name="ContainerLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+    </style>
+
+    <style name="LoginLogo">
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="LoginEmail">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="LoginButtonLogin">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="LoginDashLine">
+        <item name="android:layout_height">10dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="LoginButtonSendFeedBack">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">15dp</item>
     </style>
 
 </resources>
