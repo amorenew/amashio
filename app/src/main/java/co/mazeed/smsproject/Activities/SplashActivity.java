@@ -23,8 +23,12 @@ public class SplashActivity extends Activity {
     }
 
     private void openGuideActivity() {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
+        Intent intent1 = new Intent(this, GuideActivity.class);
+        startActivity(intent1);
+        Intent intent2 = new Intent(this, LoginActivity.class);
+        startActivity(intent2);
+        Intent intent3 = new Intent(this, SignUpActivity.class);
+        startActivity(intent3);
     }
 
 }

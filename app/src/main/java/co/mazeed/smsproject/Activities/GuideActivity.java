@@ -1,16 +1,24 @@
 package co.mazeed.smsproject.Activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import co.mazeed.smsproject.R;
 
-public class GuideActivity extends Activity {
+public class GuideActivity extends AppCompatActivity {
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
+
+        toolbar = (Toolbar) findViewById(R.id.appBar);
+        toolbar.setTitle(getString(R.string.welcome));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
 

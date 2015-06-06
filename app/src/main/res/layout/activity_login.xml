@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="match_parent"
-            android:src="@mipmap/splash"
+            android:src="@mipmap/logo_center"
             style="@style/LoginLogo" />
 
         <EditText
