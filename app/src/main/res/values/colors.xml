@@ -6,5 +6,10 @@
 
     <color name="gray">#7F7F7F</color>
     <color name="gray2">#E1E1E1</color>
+    <color name="gray3">#E5E5E5</color>
+    <color name="gray4">#666666</color>
+
     <color name="purple">#8F219C</color>
+
+    <color name="blue1">#8DBCD9</color>
 </resources>
