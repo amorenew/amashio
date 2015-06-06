@@ -102,6 +102,6 @@
             android:textColor="@color/gray2"
             android:textStyle="bold"
             android:textAllCaps="false"
-            style="@style/LoginButtonSendFeedBack" />
+            style="@style/LoginButtonSignUp" />
     </LinearLayout>
 </RelativeLayout>

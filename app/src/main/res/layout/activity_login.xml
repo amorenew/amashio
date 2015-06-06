@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/hint_email"
+            android:hint="@string/mobile_email"
             android:inputType="textEmailAddress"
             android:textStyle="bold"
             style="@style/LoginEmail" />
@@ -57,14 +57,14 @@
             style="@style/LoginDashLine" />
 
         <Button
-            android:id="@+id/btnSendFeedback"
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/send_feedback"
+            android:text="@string/sign_up"
             android:background="@color/gray"
             android:textColor="@color/gray2"
             android:textStyle="bold"
             android:textAllCaps="false"
-            style="@style/LoginButtonSendFeedBack" />
+            style="@style/LoginButtonSignUp" />
     </LinearLayout>
 </RelativeLayout>

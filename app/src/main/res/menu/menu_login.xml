@@ -3,15 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="co.mazeed.smsproject.Activities.LoginActivity">
     <item
-        android:id="@+id/action_language"
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
         android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="Language"
-        android:icon="@android:drawable/ic_input_get" />
-    <item
-        android:id="@+id/action_free"
-        android:orderInCategory="200"
-        app:showAsAction="always"
-        android:enabled="false"
-        android:title="FREE!" />
+        app:showAsAction="never" />
+
 </menu>
