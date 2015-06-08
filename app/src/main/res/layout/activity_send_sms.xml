@@ -2,15 +2,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="co.mazeed.smsproject.Activities.SendSMSActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/app_bar" />
+
+    <LinearLayout
+        android:layout_below="@id/appBar"
+        style="@style/ContainerLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="23 Your points"
+            android:id="@+id/tvYourPoints"
+            android:layout_gravity="right"
+            android:textColor="@color/gray4"
+            style="@style/send_sms_your_points" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etContacts"
+            android:text="+201001234567 , Family"
+            android:lines="1"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/gray4"
+            style="@style/send_sms_your_points" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/etMessage"
+            android:text="Consequat est adipisicing consectetur qui, in eu. Aute dolore ex eu magna voluptate velit labore dolore."
+            android:gravity="top|left"
+            android:textColor="@color/gray4"
+            style="@style/send_sms_message" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="130/sms"
+            android:id="@+id/tvLettersCount"
+            android:layout_gravity="right"
+            style="@style/send_sms_letter_count" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Now"
+                android:id="@+id/btnSendNow"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="false"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                style="@style/LoginButtonLogin.send_sms_send_now"
+                android:background="@color/purple" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule..."
+                android:id="@+id/btnSchedule"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentRight="true"
+                android:background="@color/gray"
+                android:textColor="@color/gray2"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                style="@style/LoginButtonSignUp.send_sms_schedule" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

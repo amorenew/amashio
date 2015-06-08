@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import co.mazeed.smsproject.R;
 
 public class GuideActivity extends AppCompatActivity {
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

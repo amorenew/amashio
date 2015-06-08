@@ -31,12 +31,12 @@ public class SplashActivity extends Activity {
         startActivity(intent3);
         Intent intent4 = new Intent(this, ProfileActivity.class);
         startActivity(intent4);
-//        Intent intent5 = new Intent(this, SignUpActivity.class);
-//        startActivity(intent5);
-//        Intent intent6 = new Intent(this, SignUpActivity.class);
-//        startActivity(intent6);
-//        Intent intent7= new Intent(this, SignUpActivity.class);
-//        startActivity(intent7);
+        Intent intent5 = new Intent(this, SendSMSActivity.class);
+        startActivity(intent5);
+        Intent intent6 = new Intent(this, ContactDetailActivity.class);
+        startActivity(intent6);
+        Intent intent7 = new Intent(this, MessageSentActivity.class);
+        startActivity(intent7);
 //        Intent intent8= new Intent(this, SignUpActivity.class);
 //        startActivity(intent8);
     }

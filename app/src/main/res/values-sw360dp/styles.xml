@@ -44,4 +44,26 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!--send sms layout-->
+    <style name="send_sms_your_points">
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="send_sms_message">
+        <item name="android:layout_height">280dp</item>
+    </style>
+
+    <style name="send_sms_letter_count">
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+
+    <style name="LoginButtonLogin.send_sms_send_now">
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">20dp</item>
+    </style>
+
+    <style name="LoginButtonSignUp.send_sms_schedule">
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">20dp</item>
+    </style>
 </resources>
