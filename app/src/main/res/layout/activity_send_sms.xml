@@ -1,87 +1,106 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="co.mazeed.smsproject.Activities.SendSMSActivity">
 
-    <include
-        android:id="@+id/appBar"
-        layout="@layout/app_bar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_below="@id/appBar"
-        style="@style/ContainerLayout">
+        <include
+            android:id="@+id/appBar"
+            layout="@layout/app_bar" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="23 Your points"
-            android:id="@+id/tvYourPoints"
-            android:layout_gravity="right"
-            android:textColor="@color/gray4"
-            style="@style/send_sms_your_points" />
+        <LinearLayout
+            style="@style/ContainerLayout"
+            android:layout_below="@id/appBar">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etContacts"
-            android:text="+201001234567 , Family"
-            android:lines="1"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/gray4"
-            style="@style/send_sms_your_points" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:id="@+id/etMessage"
-            android:text="Consequat est adipisicing consectetur qui, in eu. Aute dolore ex eu magna voluptate velit labore dolore."
-            android:gravity="top|left"
-            android:textColor="@color/gray4"
-            style="@style/send_sms_message" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="130/sms"
-            android:id="@+id/tvLettersCount"
-            android:layout_gravity="right"
-            style="@style/send_sms_letter_count" />
-
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
+            <TextView
+                android:id="@+id/tvYourPoints"
+                style="@style/send_sms_your_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send Now"
-                android:id="@+id/btnSendNow"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                style="@style/LoginButtonLogin.send_sms_send_now"
-                android:background="@color/purple" />
+                android:layout_gravity="right"
+                android:text="23 Your points"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/gray4" />
 
-            <Button
+            <EditText
+                android:id="@+id/etContacts"
+                style="@style/send_sms_your_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lines="1"
+                android:text="+201001234567 , Family"
+                android:textColor="@color/gray4" />
+
+            <EditText
+                android:id="@+id/etMessage"
+                style="@style/send_sms_message"
+                android:layout_width="match_parent"
+                android:gravity="top|left"
+                android:text="Consequat est adipisicing consectetur qui, in eu. Aute dolore ex eu magna voluptate velit labore dolore."
+                android:textColor="@color/gray4" />
+
+            <TextView
+                android:id="@+id/tvLettersCount"
+                style="@style/send_sms_letter_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Schedule..."
-                android:id="@+id/btnSchedule"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_alignParentBottom="false"
-                android:layout_alignParentRight="true"
-                android:background="@color/gray"
-                android:textColor="@color/gray2"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                style="@style/LoginButtonSignUp.send_sms_schedule" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:layout_gravity="right"
+                android:text="130/sms"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-</RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSendNow"
+                    style="@style/LoginButtonLogin.send_sms_send_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="false"
+                    android:background="@color/purple"
+                    android:text="Send Now"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSchedule"
+                    style="@style/LoginButtonSignUp.send_sms_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="false"
+                    android:background="@color/gray"
+                    android:text="Schedule..."
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray2"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@drawable/menu_background"
+        android:textColor="#FFF"
+        app:headerLayout="@layout/fragment_navigation_drawer"
+        app:itemTextColor="#fff"
+        app:menu="@menu/drawer" />
+    <!--
+               app:itemBackground="@drawable/menu_item_background"
+app:headerLayout="@layout/drawer_header"
+-->
+</android.support.v4.widget.DrawerLayout>

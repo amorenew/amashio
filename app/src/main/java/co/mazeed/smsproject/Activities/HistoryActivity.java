@@ -1,18 +1,44 @@
 package co.mazeed.smsproject.Activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import co.mazeed.smsproject.Adapters.HistoryAdapter;
 import co.mazeed.smsproject.R;
 
-public class HistoryActivity extends Activity {
+public class HistoryActivity extends AppCompatActivity {
+
+    private ListView lvHistory;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        lvHistory = (ListView) findViewById(R.id.lvPoints);
+        List<String> history = new ArrayList<>();
+        history.add("1");
+        history.add("1");
+        history.add("1");
+        history.add("1");
+        history.add("1");
+        history.add("1");
+
+        HistoryAdapter historyAdapter = new HistoryAdapter(this, history);
+        lvHistory.setAdapter(historyAdapter);
+        toolbar = (Toolbar) findViewById(R.id.appBar);
+        toolbar.setTitle(getString(R.string.history));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
     }
 
     @Override

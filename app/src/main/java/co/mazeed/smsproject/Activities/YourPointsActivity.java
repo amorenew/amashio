@@ -1,18 +1,43 @@
 package co.mazeed.smsproject.Activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import co.mazeed.smsproject.Adapters.PointsAdapter;
 import co.mazeed.smsproject.R;
 
-public class YourPointsActivity extends Activity {
+public class YourPointsActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
+    private ListView lvPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_points);
+        lvPoint = (ListView) findViewById(R.id.lvPoints);
+        List<String> points = new ArrayList<>();
+        points.add("1");
+        points.add("1");
+        points.add("1");
+        points.add("1");
+        points.add("1");
+        points.add("1");
+
+        PointsAdapter pointsAdapter = new PointsAdapter(this, points);
+        lvPoint.setAdapter(pointsAdapter);
+        toolbar = (Toolbar) findViewById(R.id.appBar);
+        toolbar.setTitle(getString(R.string.your_points));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override

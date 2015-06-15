@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="co.mazeed.smsproject.Activities.MessageSentActivity">
     <item
-        android:id="@+id/action_detail"
+        android:id="@+id/action_go"
         android:orderInCategory="100"
         app:showAsAction="always"
         android:title="Send"

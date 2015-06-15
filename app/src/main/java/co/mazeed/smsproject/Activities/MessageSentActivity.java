@@ -42,7 +42,7 @@ public class MessageSentActivity extends AppCompatActivity {
         }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_language) {
+        if (id == R.id.action_go) {
             return true;
         }
 
