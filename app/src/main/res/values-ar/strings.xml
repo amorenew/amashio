@@ -20,5 +20,6 @@
     <string name="sms_sent">SMS Sent !</string>
     <string name="your_points">Your Points</string>
     <string name="history">History</string>
+    <string name="message_details">Message Details</string>
 
 </resources>

@@ -1,18 +1,43 @@
 package co.mazeed.smsproject.Activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import co.mazeed.smsproject.Adapters.RecipientsAdapter;
 import co.mazeed.smsproject.R;
 
-public class MessageDetailsActivity extends Activity {
+public class MessageDetailsActivity extends AppCompatActivity {
+
+    private ListView lvRecipients;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_details);
+        lvRecipients = (ListView) findViewById(R.id.lvRecipients);
+        List<String> recipients = new ArrayList<>();
+        recipients.add("1");
+        recipients.add("1");
+        recipients.add("1");
+        recipients.add("1");
+        recipients.add("1");
+        recipients.add("1");
+
+        RecipientsAdapter recipientsAdapter = new RecipientsAdapter(this, recipients);
+        lvRecipients.setAdapter(recipientsAdapter);
+        toolbar = (Toolbar) findViewById(R.id.appBar);
+        toolbar.setTitle(getString(R.string.message_details));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
