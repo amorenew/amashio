@@ -2,15 +2,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="co.mazeed.smsproject.Activities.TemplatesActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/app_bar" />
+
+    <LinearLayout
+        style="@style/ContainerLayout"
+        android:layout_below="@id/appBar"
+        android:gravity="top">
+
+        <EditText
+            android:id="@+id/etFilter"
+            style="@style/LoginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@android:drawable/ic_menu_search"
+            android:ems="10"
+            android:hint="@string/filter"
+            android:inputType="textEmailAddress"
+            android:textStyle="bold" />
+
+        <com.hb.views.PinnedSectionListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lvTemplates" />
+    </LinearLayout>
 
 </RelativeLayout>

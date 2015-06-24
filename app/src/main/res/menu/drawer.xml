@@ -6,6 +6,8 @@
         <item
             android:id="@+id/navigation_item_1"
             android:checked="true"
+            android:gravity="right"
+            android:textAlignment="gravity"
             android:title="@string/send_sms" />
         <item
             android:id="@+id/navigation_item_2"
@@ -33,4 +35,5 @@
             android:title="About" />
 
     </group>
+
 </menu>

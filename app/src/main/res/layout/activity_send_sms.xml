@@ -98,8 +98,7 @@
         android:textColor="#FFF"
         app:headerLayout="@layout/fragment_navigation_drawer"
         app:itemTextColor="#fff"
-        app:menu="@menu/drawer"
-        app:itemBackground="@drawable/menu_item_background" />
+        app:menu="@menu/drawer" />
     <!--
                app:itemBackground="@drawable/menu_item_background"
 app:headerLayout="@layout/drawer_header"

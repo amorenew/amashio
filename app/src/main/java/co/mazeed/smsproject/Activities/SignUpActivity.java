@@ -17,7 +17,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         toolbar = (Toolbar) findViewById(R.id.appBar);
-        toolbar.setTitle(getString(R.string.login));
+        toolbar.setTitle(getString(R.string.sign_up));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

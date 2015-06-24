@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SMSProject.iml" filepath="$PROJECT_DIR$/SMSProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pinned_section_listview/pinned_section_listview.iml" filepath="$PROJECT_DIR$/pinned_section_listview/pinned_section_listview.iml" />
     </modules>
   </component>
 </project>
