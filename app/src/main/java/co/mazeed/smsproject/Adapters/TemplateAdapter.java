@@ -1,90 +1,173 @@
 package co.mazeed.smsproject.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-import com.hb.views.PinnedSectionListView;
-
-import java.util.Locale;
+import java.util.ArrayList;
 
 import co.mazeed.smsproject.R;
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-/**
- * Created by amorenew on 6/24/2015.
- */
-public class TemplateAdapter extends ArrayAdapter<Item> implements PinnedSectionListView.PinnedSectionListAdapter {
+public class TemplateAdapter extends BaseAdapter implements
+        StickyListHeadersAdapter, SectionIndexer {
 
-    private static final int[] COLORS = new int[]{
-            R.color.gray3};
+    private final Context mContext;
+    private String[] mCountries;
+    private int[] mSectionIndices;
+    private Character[] mSectionLetters;
+    private LayoutInflater mInflater;
 
-    public TemplateAdapter(Context context, int resource, int textViewResourceId) {
-        super(context, resource, textViewResourceId);
-        generateDataset('A', 'Z', false);
+    public TemplateAdapter(Context context) {
+        mContext = context;
+        mInflater = LayoutInflater.from(context);
+        mCountries = context.getResources().getStringArray(R.array.countries);
+        mSectionIndices = getSectionIndices();
+        mSectionLetters = getSectionLetters();
     }
 
-    public void generateDataset(char from, char to, boolean clear) {
-
-        if (clear) clear();
-
-        final int sectionsNumber = to - from + 1;
-        prepareSections(sectionsNumber);
-
-        int sectionPosition = 0, listPosition = 0;
-        for (char i = 0; i < sectionsNumber; i++) {
-            Item section = new Item(Item.SECTION, String.valueOf((char) ('A' + i)));
-            section.sectionPosition = sectionPosition;
-            section.listPosition = listPosition++;
-            onSectionAdded(section, sectionPosition);
-            add(section);
-
-            final int itemsNumber = (int) Math.abs((Math.cos(2f * Math.PI / 3f * sectionsNumber / (i + 1f)) * 25f));
-            for (int j = 0; j < itemsNumber; j++) {
-                Item item = new Item(Item.ITEM, section.text.toUpperCase(Locale.ENGLISH) + " - " + j);
-                item.sectionPosition = sectionPosition;
-                item.listPosition = listPosition++;
-                add(item);
+    private int[] getSectionIndices() {
+        ArrayList<Integer> sectionIndices = new ArrayList<Integer>();
+        char lastFirstChar = mCountries[0].charAt(0);
+        sectionIndices.add(0);
+        for (int i = 1; i < mCountries.length; i++) {
+            if (mCountries[i].charAt(0) != lastFirstChar) {
+                lastFirstChar = mCountries[i].charAt(0);
+                sectionIndices.add(i);
             }
-
-            sectionPosition++;
         }
+        int[] sections = new int[sectionIndices.size()];
+        for (int i = 0; i < sectionIndices.size(); i++) {
+            sections[i] = sectionIndices.get(i);
+        }
+        return sections;
     }
 
-    protected void prepareSections(int sectionsNumber) {
+    private Character[] getSectionLetters() {
+        Character[] letters = new Character[mSectionIndices.length];
+        for (int i = 0; i < mSectionIndices.length; i++) {
+            letters[i] = mCountries[mSectionIndices[i]].charAt(0);
+        }
+        return letters;
     }
 
-    protected void onSectionAdded(Item section, int sectionPosition) {
+    @Override
+    public int getCount() {
+        return mCountries.length;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mCountries[position];
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView view = (TextView) super.getView(position, convertView, parent);
-        view.setTextColor(Color.DKGRAY);
-        view.setTag("" + position);
-        Item item = getItem(position);
-        if (item.type == Item.SECTION) {
-            //view.setOnClickListener(PinnedSectionListActivity.this);
-            view.setBackgroundColor(parent.getResources().getColor(COLORS[item.sectionPosition % COLORS.length]));
+        ViewHolder holder;
+
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.template_row, parent, false);
+            holder.text = (TextView) convertView.findViewById(R.id.tvTemplate);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
-        return view;
+
+        holder.text.setText(mCountries[position]);
+
+        return convertView;
     }
 
     @Override
-    public int getViewTypeCount() {
-        return 2;
+    public View getHeaderView(int position, View convertView, ViewGroup parent) {
+        HeaderViewHolder holder;
+
+        if (convertView == null) {
+            holder = new HeaderViewHolder();
+            convertView = mInflater.inflate(R.layout.list_section, parent, false);
+            holder.text = (TextView) convertView.findViewById(R.id.tvSection);
+            convertView.setTag(holder);
+        } else {
+            holder = (HeaderViewHolder) convertView.getTag();
+        }
+
+        // set list_section text as first char in name
+        CharSequence headerChar = mCountries[position].subSequence(0, 1);
+        holder.text.setText(headerChar);
+
+        return convertView;
+    }
+
+    /**
+     * Remember that these have to be static, postion=1 should always return
+     * the same Id that is.
+     */
+    @Override
+    public long getHeaderId(int position) {
+        // return the first character of the country as ID because this is what
+        // headers are based upon
+        return mCountries[position].subSequence(0, 1).charAt(0);
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return getItem(position).type;
+    public int getPositionForSection(int section) {
+        if (mSectionIndices.length == 0) {
+            return 0;
+        }
+
+        if (section >= mSectionIndices.length) {
+            section = mSectionIndices.length - 1;
+        } else if (section < 0) {
+            section = 0;
+        }
+        return mSectionIndices[section];
     }
 
     @Override
-    public boolean isItemViewTypePinned(int viewType) {
-        return viewType == Item.SECTION;
+    public int getSectionForPosition(int position) {
+        for (int i = 0; i < mSectionIndices.length; i++) {
+            if (position < mSectionIndices[i]) {
+                return i - 1;
+            }
+        }
+        return mSectionIndices.length - 1;
+    }
+
+    @Override
+    public Object[] getSections() {
+        return mSectionLetters;
+    }
+
+    public void clear() {
+        mCountries = new String[0];
+        mSectionIndices = new int[0];
+        mSectionLetters = new Character[0];
+        notifyDataSetChanged();
+    }
+
+    public void restore() {
+        mCountries = mContext.getResources().getStringArray(R.array.countries);
+        mSectionIndices = getSectionIndices();
+        mSectionLetters = getSectionLetters();
+        notifyDataSetChanged();
+    }
+
+    class HeaderViewHolder {
+        TextView text;
+    }
+
+    class ViewHolder {
+        TextView text;
     }
 
 }

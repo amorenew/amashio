@@ -12,4 +12,8 @@
     <color name="purple">#8F219C</color>
 
     <color name="blue1">#8DBCD9</color>
+
+    <color name="header_normal">#ffe74c3c</color>
+    <color name="header_pressed">#ffc0392b</color>
+
 </resources>

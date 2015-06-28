@@ -24,10 +24,17 @@
             android:inputType="textEmailAddress"
             android:textStyle="bold" />
 
-        <com.hb.views.PinnedSectionListView
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+            android:id="@+id/lvTemplates"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lvTemplates" />
+            android:clipToPadding="false"
+            android:drawSelectorOnTop="true"
+            android:padding="16dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:fastScrollEnabled="true"
+            android:overScrollMode="never" />
+
     </LinearLayout>
 
 </RelativeLayout>
