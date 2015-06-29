@@ -34,7 +34,6 @@ public class MyContactsActivity extends AppCompatActivity implements AllContacts
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setTabTextColors(R.color.accentColor, R.color.purple);
 
         tabLayout.setupWithViewPager(viewPager);
 
