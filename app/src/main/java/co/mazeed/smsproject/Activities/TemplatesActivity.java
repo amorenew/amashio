@@ -23,13 +23,14 @@ public class TemplatesActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_templates);
-        lvTemplates = (StickyListHeadersListView) findViewById(R.id.lvTemplates);
         toolbar = (Toolbar) findViewById(R.id.appBar);
 
         toolbar.setTitle(getString(R.string.templates));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        lvTemplates = (StickyListHeadersListView) findViewById(R.id.lvTemplates);
         templateAdapter = new TemplateAdapter(this);
         lvTemplates.setAdapter(templateAdapter);
         lvTemplates.setOnItemClickListener(new AdapterView.OnItemClickListener() {

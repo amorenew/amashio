@@ -45,6 +45,8 @@ public class SplashActivity extends Activity {
         startActivity(intent10);
         Intent intent11 = new Intent(this, TemplatesActivity.class);
         startActivity(intent11);
+        Intent intent12 = new Intent(this, MyContactsActivity.class);
+        startActivity(intent12);
     }
 
 }

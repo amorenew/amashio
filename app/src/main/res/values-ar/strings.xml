@@ -23,5 +23,8 @@
     <string name="message_details">Message Details</string>
     <string name="templates">Templates</string>
     <string name="filter">Filter</string>
+    <string name="contacts">Contacts</string>
+    <string name="all_contacts">All Contacts</string>
+    <string name="groups">Groups</string>
 
 </resources>
