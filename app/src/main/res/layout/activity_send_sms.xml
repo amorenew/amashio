@@ -27,23 +27,51 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/gray4" />
 
-            <EditText
-                android:id="@+id/etContacts"
+            <RelativeLayout
                 style="@style/send_sms_your_points"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:lines="1"
-                android:text="+201001234567 , Family"
-                android:textColor="@color/gray4" />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/etMessage"
-                style="@style/send_sms_message"
+
+                <EditText
+                    android:id="@+id/etContacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:text="+201001234567 , Family"
+                    android:textColor="@color/gray4" />
+
+                <ImageView
+                    android:id="@+id/ivContacts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/ico_sc_contacts" />
+
+            </RelativeLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:gravity="top|left"
-                android:text="Consequat est adipisicing consectetur qui, in eu. Aute dolore ex eu magna voluptate velit labore dolore."
-                android:textColor="@color/gray4" />
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etMessage"
+                    style="@style/send_sms_message"
+                    android:layout_width="match_parent"
+                    android:gravity="top|left"
+                    android:text="Consequat est adipisicing consectetur qui, in eu. Aute dolore ex eu magna voluptate velit labore dolore."
+                    android:textColor="@color/gray4" />
+
+                <ImageView
+                    android:id="@+id/ivMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="15dp"
+                    android:src="@mipmap/ico_sc_contacts" />
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tvLettersCount"

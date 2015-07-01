@@ -8,5 +8,5 @@
         android:orderInCategory="100"
         app:showAsAction="always"
         android:title="Send"
-        android:icon="@mipmap/icon_language" />
+        android:icon="@mipmap/ico_tb_sendsms" />
 </menu>
