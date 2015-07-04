@@ -14,14 +14,26 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+
+    }
+
 }
 
-dependencies {
-    compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:design:22.2.0'
-    compile 'se.emilsjolander.stickylistheaders:library:2.1.0'
-}
+
+    dependencies {
+        compile 'com.android.support:support-v4:22.2.0'
+        compile 'com.android.support:appcompat-v7:22.2.0'
+        compile 'com.android.support:design:22.2.0'
+        compile 'se.emilsjolander.stickylistheaders:library:2.1.0'
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    }
+
+

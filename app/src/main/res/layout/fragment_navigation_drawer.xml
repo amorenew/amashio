@@ -1,31 +1,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="vertical"
-    android:background="@color/purple">
-
+    android:layout_height="wrap_content"
+    android:background="@mipmap/img_sidebar_top">
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:src="@mipmap/ico_sc_sidebar_bgavatar"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:id="@+id/ivProfileImage" />
+        android:layout_centerVertical="true"
 
+        android:id="@+id/ivProfileImageCover" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ico_sc_default_avatar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_centerVertical="true"
+
+        android:id="@+id/ivProfileImage"
+        android:layout_alignRight="@+id/ivProfileImageCover"
+        android:layout_alignEnd="@+id/ivProfileImageCover" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/ivProfileImage"
-        android:gravity="center_vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
-        android:id="@+id/linearLayout">
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
 
+        android:id="@+id/linearLayout">
         <TextView
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
@@ -50,13 +62,12 @@
             android:layout_marginTop="10dp"
             android:id="@+id/textView" />
     </LinearLayout>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton"
+        android:padding="5dp"
         android:layout_centerVertical="true"
         android:src="@mipmap/ico_sc_sidebar_more"
         android:layout_alignParentRight="true" />
-
-</RelativeLayout>
+    </RelativeLayout>

@@ -272,4 +272,15 @@
         <item>Zambia</item>
         <item>Zimbabwe</item>
     </string-array>
+    <string-array name="menu_items">
+        <item>Send Sms</item>
+        <item>My Drafts</item>
+        <item>Templates</item>
+        <item>My Contacts</item>
+        <item>History</item>
+        <item>My Account</item>
+        <item>Switch to Arabic</item>
+        <item>Sign out</item>
+        <item>About</item>
+    </string-array>
 </resources>

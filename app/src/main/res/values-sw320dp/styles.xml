@@ -1,0 +1,69 @@
+<resources>
+    <!--Container Layout-->
+    <style name="ContainerLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@mipmap/bg_screen_gredient</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+    </style>
+
+    <style name="ButtonFont">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!--Login Layout-->
+    <style name="LoginLogo">
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="LoginEmail" parent="ButtonFont">
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="LoginButtonLogin" parent="ButtonFont">
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="LoginDashLine">
+        <item name="android:layout_height">10dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="LoginButtonSignUp" parent="ButtonFont">
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <!--Guide layout-->
+    <style name="guide_text">
+        <item name="android:layout_height">300dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--send sms layout-->
+    <style name="send_sms_your_points">
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="send_sms_message">
+        <item name="android:layout_height">240dp</item>
+    </style>
+
+    <style name="send_sms_letter_count">
+        <item name="android:layout_marginBottom">30dp</item>
+    </style>
+
+    <style name="LoginButtonLogin.send_sms_send_now">
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">20dp</item>
+    </style>
+
+    <style name="LoginButtonSignUp.send_sms_schedule">
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">20dp</item>
+    </style>
+</resources>

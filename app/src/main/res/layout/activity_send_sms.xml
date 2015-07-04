@@ -3,19 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.mazeed.smsproject.Activities.SendSMSActivity">
+    tools:context="co.mazeed.smsproject.Activities.SendSMSActivity"
+    android:id="@+id/drawer_layout">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent">
 
         <include
             android:id="@+id/appBar"
             layout="@layout/app_bar" />
-
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
         <LinearLayout
             style="@style/ContainerLayout"
-            android:layout_below="@id/appBar">
+
+           >
 
             <TextView
                 android:id="@+id/tvYourPoints"
@@ -35,6 +42,9 @@
                 android:layout_marginBottom="10dp"
                 android:lines="1"
                 android:text="+201001234567 , Family"
+                android:padding="5dp"
+                android:background="@drawable/rounded_edittext"
+
                 android:textColor="@color/gray4" />
 
             <EditText
@@ -43,6 +53,8 @@
                 android:layout_width="match_parent"
                 android:gravity="top|left"
                 android:text="Consequat est adipisicing consectetur qui, in eu. Aute dolore ex eu magna voluptate velit labore dolore."
+                android:padding="5dp"
+                android:background="@drawable/rounded_edittext"
                 android:textColor="@color/gray4" />
 
             <TextView
@@ -88,17 +100,39 @@
                     android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
-    </RelativeLayout>
+        </FrameLayout>
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@drawable/menu_background"
         android:textColor="#FFF"
-        app:headerLayout="@layout/fragment_navigation_drawer"
-        app:itemTextColor="#fff"
-        app:menu="@menu/drawer" />
+        app:itemTextColor="#FFF">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/navigation_drawer_header_include"
+                layout="@layout/fragment_navigation_drawer" />
+
+            <ListView
+                android:id="@+id/navigation_drawer_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/menu_items"
+                android:divider="@mipmap/sidebar_dotted_line"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:scrollbars="none"
+                android:layout_below="@id/navigation_drawer_header_include"/>
+
+        </RelativeLayout>
+    </android.support.design.widget.NavigationView>
     <!--
                app:itemBackground="@drawable/menu_item_background"
 app:headerLayout="@layout/drawer_header"
