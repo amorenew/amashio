@@ -3,5 +3,6 @@
     <item android:state_focused="true" android:color="@color/purple" />
     <item android:state_pressed="true" android:color="@color/gray3" />
     <item android:color="@color/gray4" />
+
     <!--default case-->
 </selector>
