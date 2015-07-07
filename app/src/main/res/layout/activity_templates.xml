@@ -4,25 +4,12 @@
     android:layout_height="match_parent"
     tools:context="co.mazeed.smsproject.Activities.TemplatesActivity">
 
-    <include
-        android:id="@+id/appBar"
-        layout="@layout/app_bar" />
 
     <LinearLayout
         style="@style/ContainerLayout"
-        android:layout_below="@id/appBar"
         android:gravity="top">
 
-        <EditText
-            android:id="@+id/etFilter"
-            style="@style/LoginEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/ic_menu_search"
-            android:ems="10"
-            android:hint="@string/filter"
-            android:inputType="textEmailAddress"
-            android:textStyle="bold" />
+
 
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
             android:id="@+id/lvTemplates"
@@ -30,7 +17,6 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:drawSelectorOnTop="true"
-            android:padding="16dp"
             android:scrollbarStyle="outsideOverlay"
             android:fastScrollEnabled="true"
             android:overScrollMode="never" />

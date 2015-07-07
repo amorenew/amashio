@@ -2,8 +2,13 @@ package co.mazeed.smsproject.Fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +78,8 @@ public class AllContactsFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
         lvContacts = (StickyListHeadersListView) view.findViewById(R.id.lvList);
-        contactsAdapter = new ContactsAdapter(getActivity());
+        String[]allcontacts=  getContactList();
+        contactsAdapter = new ContactsAdapter(getActivity(),allcontacts);
         lvContacts.setAdapter(contactsAdapter);
         lvContacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -84,7 +90,58 @@ public class AllContactsFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+    public String[] getContactList()
+    {
 
+
+
+
+        int i=0;
+        ContentResolver cr = this.getActivity().getContentResolver();
+        Cursor cur =cr.query(ContactsContract.Contacts.CONTENT_URI, null,
+                null, null, null);
+        String aNameFromContacts[] = new String[cur.getCount()];
+        String aNumberFromContacts[] = new String[cur.getCount()];
+
+        while (cur.moveToNext()) {
+            String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+            String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            Log.i("Names", name);
+            aNameFromContacts[i]=name;
+            if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+//                // Query phone here. Covered next
+                Cursor phones = cr.query(Phone.CONTENT_URI, null, Phone.CONTACT_ID + " = " + id, null, null);
+                while (phones.moveToNext()) {
+                    String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    Log.d("Number", phoneNumber);
+                    int type = phones.getInt(phones.getColumnIndex(Phone.TYPE));
+                    switch (type) {
+                        case Phone.TYPE_HOME:
+                            // do something with the Home number here...
+                            break;
+                        case Phone.TYPE_MOBILE:
+                            // do something with the Mobile number here...
+                            break;
+                        case Phone.TYPE_WORK:
+                            // do something with the Work number here...
+                            break;
+                    }
+                }
+                phones.close();
+            }
+
+      i++;
+        }
+
+
+
+
+
+        cur.close();
+
+
+    return  aNameFromContacts;
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

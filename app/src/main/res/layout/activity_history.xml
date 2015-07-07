@@ -5,9 +5,6 @@
     tools:context="co.mazeed.smsproject.Activities.HistoryActivity">
 
 
-    <include
-        android:id="@+id/appBar"
-        layout="@layout/app_bar" />
 
     <RelativeLayout
         style="@style/ContainerLayout"

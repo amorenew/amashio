@@ -32,7 +32,7 @@ public class GetTemplates extends Task {
     public static String CONTENT_TYPE_KEY = "Content-type";
     public static String ACCESS_TOKEN_KEY = "accessToken";
     public static String CONTENT_TYPE_VALUE = "application/json";
-    ArrayList<TemplateData> templateList=new ArrayList<TemplateData>();
+    public  HashMap<Integer, Map<Integer, TemplateData>> templatesMap= new HashMap<Integer, Map<Integer, TemplateData>>();
 
     public GetTemplates(DataRequestor requestor, Context context, HashMap<String, String> inputs) {
         setRequestor(requestor);
@@ -74,9 +74,21 @@ public class GetTemplates extends Task {
                     for (int i = 0; i < contactsGroups.length(); i++) {
                         JSONObject group=contactsGroups.getJSONObject(i);
                         TemplateData data=TemplateData.fromJson(group.toString());
-                        templateList.add(data);
+                        if(templatesMap.containsKey(data.getCategoryID()))
+                        {
+                            Map<Integer, TemplateData> dataMap=templatesMap.get(data.getCategoryID());
+                            dataMap.put(data.getSmsTemplateID(),data);
+                            templatesMap.put(data.getCategoryID(), dataMap);
+                        }
+                        else
+                        {
+                            Map<Integer, TemplateData> dataMap=new HashMap<Integer, TemplateData>();
+                            dataMap.put(data.getSmsTemplateID(),data);
+                            templatesMap.put(data.getCategoryID(), dataMap);
+
+                        }
                     }
-                    ServiceStorage.templateList=templateList;
+                    ServiceStorage.templatesMap=templatesMap;
 
 
                 }

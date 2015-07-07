@@ -1,13 +1,16 @@
 package co.mazeed.smsproject.Activities;
 
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import co.mazeed.smsproject.Adapters.ContactsFragmentPagerAdapter;
 import co.mazeed.smsproject.Fragments.AllContactsFragment;
@@ -21,12 +24,12 @@ public class MyContactsActivity extends AppCompatActivity implements AllContacts
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_contacts);
-        toolbar = (Toolbar) findViewById(R.id.appBar);
-
-        toolbar.setTitle(getString(R.string.contacts));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+//        toolbar = (Toolbar) findViewById(R.id.appBar);
+//
+//        toolbar.setTitle(getString(R.string.contacts));
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new ContactsFragmentPagerAdapter(getSupportFragmentManager(),
@@ -40,12 +43,13 @@ public class MyContactsActivity extends AppCompatActivity implements AllContacts
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_contacts, menu);
-        return true;
-    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_my_contacts, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

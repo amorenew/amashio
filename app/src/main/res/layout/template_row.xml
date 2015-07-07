@@ -4,6 +4,16 @@
     android:layout_height="80dp"
     android:gravity="center_vertical"
     android:padding="5dp">
+    <ImageView
+
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivdarftsTemplats"
+        android:src="@mipmap/ico_sc_draftstemplates"
+        android:padding="5dp"
+        android:layout_centerVertical="true"
+
+        android:layout_alignParentRight="true" />
 
 
     <TextView
@@ -13,14 +23,10 @@
         android:text="+20 155 654"
         android:layout_alignParentLeft="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_toLeftOf="@id/ivdarftsTemplats"
+        android:layout_centerVertical="true"
         android:textColor="@color/gray4" />
 
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
-        android:src="@mipmap/ico_sc_draftstemplates"
-        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

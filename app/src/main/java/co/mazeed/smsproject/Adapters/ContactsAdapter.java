@@ -18,26 +18,28 @@ public class ContactsAdapter extends BaseAdapter implements
         StickyListHeadersAdapter, SectionIndexer {
 
     private final Context mContext;
-    private String[] mCountries;
+    private String[] mContacts;
+    private String[] mOrginalContacts;
     private int[] mSectionIndices;
     private Character[] mSectionLetters;
     private LayoutInflater mInflater;
 
-    public ContactsAdapter(Context context) {
+    public ContactsAdapter(Context context,String[] mContacts) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
-        mCountries = context.getResources().getStringArray(R.array.countries);
+       this.mOrginalContacts =mContacts;
+        this.mContacts=mContacts;
         mSectionIndices = getSectionIndices();
         mSectionLetters = getSectionLetters();
     }
 
     private int[] getSectionIndices() {
         ArrayList<Integer> sectionIndices = new ArrayList<Integer>();
-        char lastFirstChar = mCountries[0].charAt(0);
+        char lastFirstChar = mContacts[0].charAt(0);
         sectionIndices.add(0);
-        for (int i = 1; i < mCountries.length; i++) {
-            if (mCountries[i].charAt(0) != lastFirstChar) {
-                lastFirstChar = mCountries[i].charAt(0);
+        for (int i = 1; i < mContacts.length; i++) {
+            if (mContacts[i].charAt(0) != lastFirstChar) {
+                lastFirstChar = mContacts[i].charAt(0);
                 sectionIndices.add(i);
             }
         }
@@ -51,19 +53,19 @@ public class ContactsAdapter extends BaseAdapter implements
     private Character[] getSectionLetters() {
         Character[] letters = new Character[mSectionIndices.length];
         for (int i = 0; i < mSectionIndices.length; i++) {
-            letters[i] = mCountries[mSectionIndices[i]].charAt(0);
+            letters[i] = mContacts[mSectionIndices[i]].charAt(0);
         }
         return letters;
     }
 
     @Override
     public int getCount() {
-        return mCountries.length;
+        return mContacts.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return mCountries[position];
+        return mContacts[position];
     }
 
     @Override
@@ -84,7 +86,7 @@ public class ContactsAdapter extends BaseAdapter implements
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.checkBox.setText(mCountries[position]);
+        holder.checkBox.setText(mContacts[position]);
 
         return convertView;
     }
@@ -103,7 +105,7 @@ public class ContactsAdapter extends BaseAdapter implements
         }
 
         // set list_section text as first char in name
-        CharSequence headerChar = mCountries[position].subSequence(0, 1);
+        CharSequence headerChar = mContacts[position].subSequence(0, 1);
         holder.text.setText(headerChar);
 
         return convertView;
@@ -117,7 +119,7 @@ public class ContactsAdapter extends BaseAdapter implements
     public long getHeaderId(int position) {
         // return the first character of the country as ID because this is what
         // headers are based upon
-        return mCountries[position].subSequence(0, 1).charAt(0);
+        return mContacts[position].subSequence(0, 1).charAt(0);
     }
 
     @Override
@@ -150,14 +152,14 @@ public class ContactsAdapter extends BaseAdapter implements
     }
 
     public void clear() {
-        mCountries = new String[0];
+        mContacts = new String[0];
         mSectionIndices = new int[0];
         mSectionLetters = new Character[0];
         notifyDataSetChanged();
     }
 
     public void restore() {
-        mCountries = mContext.getResources().getStringArray(R.array.countries);
+        mContacts = this.mOrginalContacts;
         mSectionIndices = getSectionIndices();
         mSectionLetters = getSectionLetters();
         notifyDataSetChanged();

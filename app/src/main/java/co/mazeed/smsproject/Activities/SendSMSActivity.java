@@ -70,24 +70,38 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(SendSMSActivity.this, position + " pressed", Toast.LENGTH_LONG).show();
+                drawerLayout.closeDrawers();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
                 switch (position) {
                     case 0:
                         break;
                     case 1://My Drafts
                         break;
                     case 2://Templates
-                        Intent intent11 = new Intent(SendSMSActivity.this, TemplatesActivity.class);
-                        startActivity(intent11);
+                        toolbar.setTitle(getString(R.string.templates));
+
+                        TemplatesActivity fragment = new TemplatesActivity();
+                        fragmentTransaction.replace(R.id.content, fragment);
+                        fragmentTransaction.commit();
+
+                        // For rest of the options we just show a toast on click
                         break;
                     case 3://My Contacts
+                        toolbar.setTitle(getString(R.string.contacts));
+
                         Intent intent12 = new Intent(SendSMSActivity.this, MyContactsActivity.class);
                         startActivity(intent12);
                         break;
                     case 4://History
-                        Intent intent9 = new Intent(SendSMSActivity.this, HistoryActivity.class);
-                        startActivity(intent9);
+                        toolbar.setTitle(getString(R.string.history));
+                        HistoryActivity historyFragment = new HistoryActivity();
+                        fragmentTransaction.replace(R.id.content, historyFragment);
+                        fragmentTransaction.commit();
+
                         break;
-                    case 5://My Account
+                    case 5://Profile
+
                         Intent intent4 = new Intent(SendSMSActivity.this, ProfileActivity.class);
                         startActivity(intent4);
                         break;
@@ -99,7 +113,6 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
                         break;
 
                 }
-                drawerLayout.closeDrawers();
             }
         });
 
@@ -128,7 +141,6 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
 
     private void fillUserInfo(UserInfo currentUser) {
         tvUserName.setText(currentUser.getUserName());
-        tvUserName.setText(currentUser.getEmail());
         tvYourPoints.setText(currentUser.getBalance() + "");
 
     }
@@ -146,7 +158,7 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        toolbar.getTitle();
         if (id == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
 
@@ -160,6 +172,21 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+
+    }
+
 
     @Override
     public void onStart(Task task) {
