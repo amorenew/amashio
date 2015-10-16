@@ -64,11 +64,12 @@ public class Login extends Task {
 				mainObject = new JSONObject(r);
 				String status = mainObject.getString("status");
 				if (status.equalsIgnoreCase("Success")) {
-					result = mainObject.getString("massage");
+//					result = mainObject.getString("massage");
 					String tokenkey = mainObject.getString("tokenKey");
 					ServiceStorage.tokenKey = tokenkey;
 					UserInfo currentuser = UserInfo.fromJson(r);
 					ServiceStorage.currentUser=currentuser;
+					result=r;
 
 				} else if (status.equalsIgnoreCase("failure")) {
 					JSONObject errorobj = mainObject.getJSONObject("errors");

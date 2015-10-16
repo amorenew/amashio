@@ -65,7 +65,7 @@ public class GetContactsGroupList extends Task {
 				if(status.equalsIgnoreCase("Success"))
 				{
 					result=mainObject.getString("massage");
-					String tokenkey=mainObject.getString("recordsNo");
+					String recordsNo=mainObject.getString("recordsNo");
 					JSONArray contactsGroups=mainObject.getJSONArray("contactGroupList")	;
 					for (int i = 0; i < contactsGroups.length(); i++) {
 						JSONObject group=contactsGroups.getJSONObject(i);

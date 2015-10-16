@@ -47,7 +47,7 @@
             android:textColor="@android:color/white"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:id="@+id/tvUserName"
+            android:id="@+id/tvUserNameMenu"
             android:textSize="18dp" />
 
         <TextView

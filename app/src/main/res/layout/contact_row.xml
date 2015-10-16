@@ -13,6 +13,9 @@
         android:id="@+id/cbContact"
         android:textColor="@color/gray4"
         android:layout_alignParentLeft="true"
+
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:textAppearance="?android:attr/textAppearanceMedium"
 
         />
@@ -22,7 +25,7 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:id="@+id/imageView3"
-        android:src="@mipmap/ico_sc_draftstemplates"
+        android:src="@mipmap/ico_sc_sidebar_more"
         android:layout_alignParentRight="true" />
 
 </RelativeLayout>

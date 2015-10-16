@@ -25,7 +25,7 @@ public class HistoryActivity extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_history, container, false);
-        lvHistory = (ListView) view.findViewById(R.id.lvPoints);
+        lvHistory = (ListView) view.findViewById(R.id.lvHistory);
         List<String> history = new ArrayList<>();
         history.add("1");
         history.add("1");

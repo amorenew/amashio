@@ -32,9 +32,10 @@ public class Logout  extends Task {
 		setId(TaskID.LogoutTask);
 		this.mxontext = context;
 		url = Communication.Common_Base_URL + "logout/?";
-		url+=buildHttpBody(inputs);
+		url += buildHttpBody(inputs);
 
 	}
+
 	String buildHttpBody(Map<String, String> inputs) {
 		String concat = "";
 		for (String key : inputs.keySet()) {
@@ -47,6 +48,7 @@ public class Logout  extends Task {
 		}
 		return concat;
 	}
+
 	@Override
 	public void execute() {
 		response = (ResponseObject) Communication.postMethodWithoutBody(url,

@@ -1,9 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="co.mazeed.smsproject.Activities.MyContactsActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="co.mazeed.smsproject.Fragments.MyContactsFragment">
+
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:id="@+id/action_send_contacts"
+        android:orderInCategory="200"
+        android:title="Search"
+        android:icon="@drawable/abc_ic_commit_search_api_mtrl_alpha"
+        app:showAsAction="ifRoom"
+        ></item>
 </menu>

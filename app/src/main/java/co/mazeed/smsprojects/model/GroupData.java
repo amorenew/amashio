@@ -1,6 +1,7 @@
 package co.mazeed.smsprojects.model;
 
 import java.io.IOException;
+import java.util.Comparator;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -61,5 +62,17 @@ public class GroupData {
 	public void setAddDate(String addDate) {
 		this.addDate = addDate;
 	}
+
+	public static Comparator<GroupData> GroupNameComparator = new Comparator<GroupData>() {
+
+		public int compare(GroupData s1, GroupData s2) {
+			String groupName1 = s1.groupName.toUpperCase();
+			String groupName2 = s2.groupName.toUpperCase();
+			//ascending order
+			return groupName1.compareTo(groupName2);
+
+			//descending order
+			//return StudentName2.compareTo(StudentName1);
+		}};
 
 }

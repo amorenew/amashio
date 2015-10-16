@@ -1,11 +1,15 @@
 package co.mazeed.smsproject.Activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 
 import android.app.ProgressDialog;
@@ -26,6 +30,7 @@ import co.mazeed.smsproject.tasks.Login;
 
 public class LoginActivity extends AppCompatActivity implements
     OnClickListener, DataRequestor {
+    private SharedPreferences appSettin;
 
         private Toolbar toolbar;
         EditText etEmail, etPassword;
@@ -36,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_login);
-
+            appSettin = getSharedPreferences("SMS", Context.MODE_PRIVATE);
             etEmail = (EditText) findViewById(R.id.etEmail);
             etPassword = (EditText) findViewById(R.id.etPassword);
             btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -138,11 +143,15 @@ public class LoginActivity extends AppCompatActivity implements
             String result=(String)task.getResult();
             if (ServiceStorage.tokenKey!=null)
             {
+                SharedPreferences.Editor editor = appSettin.edit();
+                editor.putString("TokenKey", ServiceStorage.tokenKey);
+                editor.commit();
+                mCreateAndSaveFile("CurrentUser",result);
                 finish();
-		        Intent intent4 = new Intent(this, ProfileActivity.class);
-//		        startActivity(intent4);
-				  Intent intent5 = new Intent(this, SendSMSActivity.class);
-		        startActivity(intent5);
+		        Intent intent4 = new Intent(this, HomeActivity.class);
+		        startActivity(intent4);
+//				  Intent intent5 = new Intent(this, SendSMSFragment.class);
+//		        startActivity(intent5);
 //                Intent intent6 = new Intent(this, ContactDetailActivity.class);
 //                startActivity(intent6);
             }
@@ -153,6 +162,17 @@ public class LoginActivity extends AppCompatActivity implements
             }
         }
 
+    }
+
+    public void mCreateAndSaveFile(String params, String mJsonResponse) {
+        try {
+            FileWriter file = new FileWriter("/data/data/"+ this.getPackageName() + "/" + params);
+            file.write(mJsonResponse);
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

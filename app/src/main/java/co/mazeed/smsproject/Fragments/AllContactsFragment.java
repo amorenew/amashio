@@ -2,22 +2,29 @@ package co.mazeed.smsproject.Fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.ContentResolver;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 
+import java.util.HashMap;
+
+import co.mazeed.smsproject.Activities.ChooseContactActivity;
+import co.mazeed.smsproject.Activities.HomeActivity;
 import co.mazeed.smsproject.Adapters.ContactsAdapter;
 import co.mazeed.smsproject.R;
+import co.mazeed.smsproject.controller.communication.AsyncTaskLocalListener;
+import co.mazeed.smsproject.storage.ServiceStorage;
+import co.mazeed.smsproject.tasks.getContactsAsynTask;
+import co.mazeed.smsprojects.model.ContactData;
+import co.mazeed.smsprojects.model.GroupInfo;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -26,7 +33,9 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * Use the {@link AllContactsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AllContactsFragment extends android.support.v4.app.Fragment {
+public class AllContactsFragment extends android.support.v4.app.Fragment implements
+        AsyncTaskLocalListener ,ContactsAdapter.onContactSelectorUnSelect{
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,7 +48,10 @@ public class AllContactsFragment extends android.support.v4.app.Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    public  OnFragmentInteractionListener mListener;
+
+    private EditText etFilter;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -78,70 +90,66 @@ public class AllContactsFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
         lvContacts = (StickyListHeadersListView) view.findViewById(R.id.lvList);
-        String[]allcontacts=  getContactList();
-        contactsAdapter = new ContactsAdapter(getActivity(),allcontacts);
-        lvContacts.setAdapter(contactsAdapter);
-        lvContacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        etFilter = (EditText) view.findViewById(R.id.etFilter);
+
+//        lvContacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Log.d("OnItemclick", "Cnatct"+((ContactData)contactsAdapter.getItem(position)).getContactName());
+//                mListener.onContactSelected(((ContactData) contactsAdapter.getItem(position)));
+//
+//            }
+//        });
+
+
+
+        etFilter.addTextChangedListener(new TextWatcher() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                contactsAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
             }
         });
-
+        if(ServiceStorage.contactsList!=null&&ServiceStorage.contactsList.size()>0) {
+            contactsAdapter = new ContactsAdapter(getActivity(),ServiceStorage.contactsList,this);
+            lvContacts.setAdapter(contactsAdapter);
+//            lvContacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    Log.d("OnItemclick", "Cnatct" + ((ContactData) contactsAdapter.getItem(position)).getContactName());
+//                   // mListener.onContactSelected(((ContactData) contactsAdapter.getItem(position)));
+//
+//                }
+//            });
+        }
+        else {
+            new getContactsAsynTask(this.getActivity(),this).execute();
+        }
         // Inflate the layout for this fragment
         return view;
     }
-    public String[] getContactList()
-    {
+
+    //    // Called at the start of the visible lifetime.
+//    @Override
+//    public void onStart(){
+//        super.onStart();
+//
+//    }
 
 
-
-
-        int i=0;
-        ContentResolver cr = this.getActivity().getContentResolver();
-        Cursor cur =cr.query(ContactsContract.Contacts.CONTENT_URI, null,
-                null, null, null);
-        String aNameFromContacts[] = new String[cur.getCount()];
-        String aNumberFromContacts[] = new String[cur.getCount()];
-
-        while (cur.moveToNext()) {
-            String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
-            String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            Log.i("Names", name);
-            aNameFromContacts[i]=name;
-            if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-//                // Query phone here. Covered next
-                Cursor phones = cr.query(Phone.CONTENT_URI, null, Phone.CONTACT_ID + " = " + id, null, null);
-                while (phones.moveToNext()) {
-                    String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    Log.d("Number", phoneNumber);
-                    int type = phones.getInt(phones.getColumnIndex(Phone.TYPE));
-                    switch (type) {
-                        case Phone.TYPE_HOME:
-                            // do something with the Home number here...
-                            break;
-                        case Phone.TYPE_MOBILE:
-                            // do something with the Mobile number here...
-                            break;
-                        case Phone.TYPE_WORK:
-                            // do something with the Work number here...
-                            break;
-                    }
-                }
-                phones.close();
-            }
-
-      i++;
-        }
-
-
-
-
-
-        cur.close();
-
-
-    return  aNameFromContacts;
-    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -154,17 +162,46 @@ public class AllContactsFragment extends android.support.v4.app.Fragment {
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
+
+
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
 
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        mListener = null;
+//    }
+
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void onFinish() {
+        if(ServiceStorage.contactsList!=null&&ServiceStorage.contactsList.size()>0) {
+//            aNameFromContacts = ServiceStorage.contactsList;
+//            aNumberFromContacts=ServiceStorage.contactsNumbersList;
+            contactsAdapter = new ContactsAdapter(getActivity(),ServiceStorage.contactsList,this);
+            lvContacts.setAdapter(contactsAdapter);
+
+
+        }
     }
+
+    @Override
+    public void onSelectContact(ContactData uri) {
+        mListener.onContactSelected(uri,true);
+
+
+    }
+
+    @Override
+    public void onUnselectContact(ContactData uri) {
+        mListener.onContactSelected(uri,false);
+
+
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -179,6 +216,10 @@ public class AllContactsFragment extends android.support.v4.app.Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+        public void onContactSelected(ContactData uri, boolean b);
+
     }
+
+
 
 }

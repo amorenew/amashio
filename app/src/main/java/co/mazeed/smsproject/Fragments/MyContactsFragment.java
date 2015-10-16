@@ -1,29 +1,31 @@
-package co.mazeed.smsproject.Activities;
+package co.mazeed.smsproject.Fragments;
 
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.view.ViewGroup;
 
+import co.mazeed.smsproject.Activities.HomeActivity;
 import co.mazeed.smsproject.Adapters.ContactsFragmentPagerAdapter;
-import co.mazeed.smsproject.Fragments.AllContactsFragment;
-import co.mazeed.smsproject.Fragments.ContactsGroupFragment;
 import co.mazeed.smsproject.R;
+import co.mazeed.smsprojects.model.ContactData;
 
-public class MyContactsActivity extends AppCompatActivity implements AllContactsFragment.OnFragmentInteractionListener, ContactsGroupFragment.OnFragmentInteractionListener {
+public class MyContactsFragment extends android.support.v4.app.Fragment implements AllContactsFragment.OnFragmentInteractionListener {
     private Toolbar toolbar;
+    HomeActivity mActivity;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_contacts);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_my_contacts, container, false);
+        mActivity = (HomeActivity) this.getActivity();
 //        toolbar = (Toolbar) findViewById(R.id.appBar);
 //
 //        toolbar.setTitle(getString(R.string.contacts));
@@ -31,15 +33,24 @@ public class MyContactsActivity extends AppCompatActivity implements AllContacts
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setHomeButtonEnabled(true);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new ContactsFragmentPagerAdapter(getSupportFragmentManager(),
-                MyContactsActivity.this));
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
 
-        // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         tabLayout.setTabTextColors(getResources().getColorStateList(R.color.tab_selector));
+        // Give the TabLayout the ViewPager
 
+        return view;
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        ContactsFragmentPagerAdapter contactsFragmentPagerAdapter = new ContactsFragmentPagerAdapter(getChildFragmentManager(), mActivity.getApplicationContext(),MyContactsFragment.this);
+        viewPager.setAdapter(contactsFragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
 
     }
 
@@ -68,6 +79,13 @@ public class MyContactsActivity extends AppCompatActivity implements AllContacts
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+
+
+    @Override
+    public void onContactSelected(ContactData uri, boolean b) {
 
     }
 }

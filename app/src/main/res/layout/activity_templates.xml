@@ -1,26 +1,94 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@mipmap/bg_screen_gredient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="co.mazeed.smsproject.Activities.TemplatesActivity">
 
 
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/app_bar" />
+
+    <RelativeLayout
+        android:id="@+id/segmented_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBar"
+        android:background="@android:color/transparent"
+        android:gravity="center">
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmented2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_checked_text_color="#7C4DFF"
+            segmentedgroup:sc_corner_radius="0dp">
+
+            <RadioButton
+                android:id="@+id/bttemplates"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Templates"
+                android:checked="false" />
+
+            <RadioButton
+                android:id="@+id/btdrafts"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="Drafts" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+    </RelativeLayout>
+
     <LinearLayout
         style="@style/ContainerLayout"
+        android:layout_below="@id/segmented_lay"
         android:gravity="top">
 
-
+        <EditText
+            android:id="@+id/etFilter"
+            style="@style/LoginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:drawableRight="@android:drawable/ic_menu_search"
+            android:ems="10"
+            android:hint="@string/filter"
+            android:inputType="textEmailAddress"
+            android:padding="3dp"
+            android:textStyle="bold" />
 
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-            android:id="@+id/lvTemplates"
+        android:id="@+id/lvTemplates"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:drawSelectorOnTop="true"
+        android:fastScrollEnabled="true"
+        android:overScrollMode="never"
+
+        android:scrollbarStyle="outsideOverlay" />
+        <ListView
+            android:id="@+id/lvDrafts"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:drawSelectorOnTop="true"
-            android:scrollbarStyle="outsideOverlay"
             android:fastScrollEnabled="true"
-            android:overScrollMode="never" />
-
+            android:overScrollMode="never"
+            android:scrollbarStyle="outsideOverlay" />
     </LinearLayout>
 
 </RelativeLayout>

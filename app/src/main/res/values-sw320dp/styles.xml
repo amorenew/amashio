@@ -58,12 +58,12 @@
     </style>
 
     <style name="LoginButtonLogin.send_sms_send_now">
-        <item name="android:paddingRight">20dp</item>
-        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
     </style>
 
     <style name="LoginButtonSignUp.send_sms_schedule">
-        <item name="android:paddingRight">20dp</item>
-        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
     </style>
 </resources>

@@ -33,7 +33,8 @@ android {
         compile 'com.android.support:design:22.2.0'
         compile 'se.emilsjolander.stickylistheaders:library:2.1.0'
         compile fileTree(dir: 'libs', include: ['*.jar'])
+        compile 'info.hoang8f:android-segmented:1.0.6'
+
 
     }
-
 

@@ -9,7 +9,8 @@ public abstract class Task {
 
 	public enum TaskID { LoginTask, SignupTask, LogoutTask, CheckTokenKeyTask, UpdateTokenKeyTask,ResetPasswordTask
 		,UpdatePasswordTask, GetPointsBalanceTask, GetContactsGroupTask, AddContactGroupTask, UpdateContactGroupTask,DeleteContactGroupTask
-,GetContactsListTask,GetContactsDetailsTask,AddContactTask	,UpdateContactTask, GetTemplatesTask, DeleteContactTask}
+,GetContactsListTask,GetContactsDetailsTask,AddContactTask	,UpdateContactTask, GetTemplatesTask, DeleteContactTask,GetTemplatesCategoryTask, GetContactsPerGroupTask;
+	}
 	
 
 	public enum ConnectionError {

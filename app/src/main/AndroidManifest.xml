@@ -1,59 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.mazeed.smsproject">
+    package="co.mazeed.smsproject" >
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".Activities.SplashActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Activities.GuideActivity"
-            android:label="@string/title_activity_guide"></activity>
+            android:label="@string/title_activity_guide" />
         <activity
             android:name=".Activities.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".Activities.SignUpActivity"
-            android:label="@string/title_activity_sign_up"></activity>
+            android:label="@string/title_activity_sign_up" />
         <activity
             android:name=".Activities.ProfileActivity"
-            android:label="@string/title_activity_profile"></activity>
+            android:label="@string/title_activity_profile" />
         <activity
-            android:name=".Activities.SendSMSActivity"
-            android:label="@string/title_activity_send_sms"></activity>
+            android:name=".Fragments.SendSMSFragment"
+            android:label="@string/title_activity_send_sms" />
         <activity
             android:name=".Activities.YourPointsActivity"
-            android:label="@string/title_activity_your_points"></activity>
+            android:label="@string/title_activity_your_points" />
         <activity
-            android:name=".Activities.MyContactsActivity"
-            android:label="@string/title_activity_my_contacts"></activity>
+            android:name=".Fragments.MyContactsFragment"
+            android:label="@string/title_activity_my_contacts" />
         <activity
             android:name=".Activities.TemplatesActivity"
-            android:label="@string/title_activity_templates"></activity>
+            android:label="@string/title_activity_templates" />
         <activity
             android:name=".Activities.HistoryActivity"
-            android:label="@string/title_activity_history"></activity>
+            android:label="@string/title_activity_history" />
         <activity
             android:name=".Activities.MessageDetailsActivity"
-            android:label="@string/title_activity_message_details"></activity>
+            android:label="@string/title_activity_message_details" />
         <activity
             android:name=".Activities.MessageSentActivity"
-            android:label="@string/title_activity_message_sent"></activity>
+            android:label="@string/title_activity_message_sent" />
         <activity
             android:name=".Activities.ContactDetailActivity"
-            android:label="@string/title_activity_contact_detail"></activity>
+            android:label="@string/title_activity_contact_detail" />
+        <activity
+            android:name=".Activities.AllContactsGroup"
+            android:label="AllContactsGroup" />
+        <activity
+            android:name=".Activities.ChooseContactActivity"
+            android:label="Choose Contacts" />
+        <activity
+            android:name=".Activities.HomeActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".Activities.CountriesActivity"
+            android:label="@string/title_activity_countries" >
+        </activity>
     </application>
 
 </manifest>

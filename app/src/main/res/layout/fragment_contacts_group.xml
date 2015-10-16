@@ -11,8 +11,11 @@
         android:layout_height="wrap_content"
         android:drawableRight="@android:drawable/ic_menu_search"
         android:ems="10"
+        android:layout_margin="10dp"
+        android:padding="3dp"
         android:hint="@string/filter"
         android:inputType="textEmailAddress"
+        android:background="@drawable/rounded_edittext"
         android:textStyle="bold" />
 
     <ListView

@@ -1,45 +1,60 @@
 package co.mazeed.smsproject.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.provider.SyncStateContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import co.mazeed.smsproject.R;
+import co.mazeed.smsproject.storage.ServiceStorage;
 import co.mazeed.smsprojects.model.TemplateData;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class TemplateAdapter extends BaseAdapter implements
-        StickyListHeadersAdapter, SectionIndexer {
+        StickyListHeadersAdapter, SectionIndexer, Filterable {
 
     private final Context mContext;
-    private  HashMap<Integer, Map<Integer, TemplateData>> mTemplatesMap;
+    Activity mActivity;
+    private HashMap<Integer, Map<Integer, TemplateData>> mTemplatesMap;
     private Integer[] mSectionIndices;
     private Integer[] mSectionLetters;
     private LayoutInflater mInflater;
     ArrayList<TemplateData> mTemplates;
+    HashMap<Integer, Map<Integer, TemplateData>> mOrinaglmTemplates;
 
-    public TemplateAdapter(Context context,HashMap<Integer, Map<Integer, TemplateData>> mTemplatesmap) {
-        mContext = context;
+
+
+    public TemplateAdapter(Context context, HashMap<Integer, Map<Integer, TemplateData>> mTemplatesmap) {
+       this. mContext = context;
         mInflater = LayoutInflater.from(context);
         this.mTemplatesMap = mTemplatesmap;
-        Set<Integer> myset=mTemplatesmap.keySet();
-        mSectionIndices =myset.toArray(new Integer[myset.size()]);
-        mTemplates = getAllData();
+        Set<Integer> myset = mTemplatesmap.keySet();
+        mSectionIndices = myset.toArray(new Integer[myset.size()]);
+        mTemplates = getAllData(mSectionIndices,mTemplatesmap);
+        mOrinaglmTemplates=mTemplatesmap;
 //                new ArrayList<TemplateData>(mTemplatesmap.get(mSectionIndices[0]).values());
 
         mSectionLetters = mSectionIndices;
     }
 
-//    private int[] getSectionIndices() {
+    //    private int[] getSectionIndices() {
 //        ArrayList<Integer> sectionIndices = new ArrayList<Integer>();
 //        char lastFirstChar = mCountries[0].charAt(0);
 //        sectionIndices.add(0);
@@ -63,14 +78,15 @@ public class TemplateAdapter extends BaseAdapter implements
 //        }
 //        return letters;
 //    }
-    private ArrayList<TemplateData> getAllData() {
+    private ArrayList<TemplateData> getAllData(Integer[] sectionIndices, HashMap<Integer, Map<Integer, TemplateData>>templatesMap) {
         ArrayList<TemplateData> templates = new ArrayList<TemplateData>();
-        for (int i = 0; i < mSectionIndices.length; i++) {
-          Map<Integer,TemplateData> mapdata= mTemplatesMap.get(mSectionIndices[i]);
+        for (int i = 0; i < sectionIndices.length; i++) {
+            Map<Integer, TemplateData> mapdata = templatesMap.get(sectionIndices[i]);
             templates.addAll(mapdata.values());
         }
         return templates;
     }
+
     @Override
     public int getCount() {
         return mTemplates.size();
@@ -78,7 +94,8 @@ public class TemplateAdapter extends BaseAdapter implements
 
     @Override
     public Object getItem(int position) {
-      return mTemplates.get(position) ;   }
+        return mTemplates.get(position);
+    }
 
     @Override
     public long getItemId(int position) {
@@ -87,7 +104,7 @@ public class TemplateAdapter extends BaseAdapter implements
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
 
         if (convertView == null) {
@@ -98,8 +115,21 @@ public class TemplateAdapter extends BaseAdapter implements
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Toast.makeText(TemplatesActivity.this.getApplicationContext(), "Item " + position + " clicked!", Toast.LENGTH_SHORT).show();
+//
+//                TemplateData data = (TemplateData)getItem(position);
+//                Log.d("OnItemclick", data.getSmsTemplateContent());
+//                Intent returnIntent = new Intent();
+//                returnIntent.putExtra("result", data.getSmsTemplateContent());
+//                mActivity.setResult(Activity.RESULT_OK, returnIntent);
+//                mActivity. finish();
+//            }
+//        });
 
-        holder.text.setText( mTemplates.get(position).getSmsTemplateContent());
+        holder.text.setText(mTemplates.get(position).getSmsTemplateContent());
 
         return convertView;
     }
@@ -118,9 +148,19 @@ public class TemplateAdapter extends BaseAdapter implements
         }
 
         // set list_section text as first char in name
-        CharSequence headerChar = mTemplates.get(position).getCategoryID()+"";
-        holder.text.setText(headerChar);
+        if (ServiceStorage.templatesCategoryList != null && ServiceStorage.templatesCategoryList.size() > 0) {
+            if (ServiceStorage.templatesCategoryList.containsKey(mTemplates.get(position).getCategoryID())) {
+                String categoryy = ServiceStorage.templatesCategoryList.get(mTemplates.get(position).getCategoryID()).getCategoryName();
+                holder.text.setText(categoryy);
+            } else {
+                CharSequence headerChar = mTemplates.get(position).getCategoryID() + "";
+                holder.text.setText(headerChar);
+            }
 
+        } else {
+            CharSequence headerChar = mTemplates.get(position).getCategoryID() + "";
+            holder.text.setText(headerChar);
+        }
         return convertView;
     }
 
@@ -172,12 +212,68 @@ public class TemplateAdapter extends BaseAdapter implements
     }
 
     public void restore() {
-        mTemplates = getAllData();
+        mTemplates = getAllData(mSectionIndices,mTemplatesMap);
 //                new ArrayList<TemplateData>(mTemplatesMap.values());
-        Set<Integer> myset=mTemplatesMap.keySet();
-        mSectionIndices =myset.toArray(new Integer[myset.size()]);
+        Set<Integer> myset = mTemplatesMap.keySet();
+        mSectionIndices = myset.toArray(new Integer[myset.size()]);
         mSectionLetters = mSectionIndices;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                Log.d("publishResults", "**** PUBLISHING RESULTS for: " + constraint);
+
+                HashMap<Integer, Map<Integer, TemplateData>> templatesmap = (HashMap<Integer, Map<Integer, TemplateData>>) results.values;
+                Set<Integer> myset = templatesmap.keySet();
+                Integer[] sectionIndices = myset.toArray(new Integer[myset.size()]);
+                mTemplates = getAllData(sectionIndices,templatesmap);
+//                mOrinaglmTemplates=templatesmap;
+                mSectionLetters = mSectionIndices;
+                TemplateAdapter.this.notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                Log.d("performFiltering", "**** PERFORM FILTERING for: " + constraint);
+                final FilterResults oReturn = new FilterResults();
+
+                final HashMap<Integer, Map<Integer, TemplateData>> results = new HashMap<Integer, Map<Integer, TemplateData>> ();
+                if (mOrinaglmTemplates == null)
+                    mOrinaglmTemplates = mTemplatesMap;
+                if (constraint != null) {
+                    if (mOrinaglmTemplates != null && mOrinaglmTemplates.size() > 0) {
+                        for (Integer i: mOrinaglmTemplates.keySet()) {
+                            for(TemplateData g:mOrinaglmTemplates.get(i).values()) {
+                                if (g.getSmsTemplateContent().toLowerCase()
+                                        .contains(constraint.toString()))
+                                    if(results.containsKey(g.getCategoryID()))
+                                    {
+                                        Map<Integer, TemplateData> dataMap=results.get(g.getCategoryID());
+                                        dataMap.put(g.getSmsTemplateID(),g);
+                                        results.put(g.getCategoryID(), dataMap);
+                                    }
+                                    else
+                                    {
+                                        Map<Integer, TemplateData> dataMap=new HashMap<Integer, TemplateData>();
+                                        dataMap.put(g.getSmsTemplateID(),g);
+                                        results.put(g.getCategoryID(), dataMap);
+
+                                    }
+                                
+                            }
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+
+            }
+        };
     }
 
     class HeaderViewHolder {
@@ -187,5 +283,6 @@ public class TemplateAdapter extends BaseAdapter implements
     class ViewHolder {
         TextView text;
     }
+
 
 }

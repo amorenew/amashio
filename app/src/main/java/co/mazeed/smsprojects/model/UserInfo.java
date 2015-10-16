@@ -31,6 +31,11 @@ public class UserInfo {
 	@JsonProperty("balance")
 	int balance;
 
+	@JsonProperty("photo")
+	String photo;
+	@JsonProperty("created")
+	String created;
+
 	public static UserInfo fromJson(String jsonText) {
 		ObjectMapper mapper = new ObjectMapper();
 		UserInfo user = null;
@@ -108,4 +113,35 @@ public class UserInfo {
 		this.email = email;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getMassage() {
+		return massage;
+	}
+
+	public void setMassage(String massage) {
+		this.massage = massage;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
+	}
 }
